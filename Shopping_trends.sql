@@ -22,4 +22,16 @@ FROM transectiontrends.shopping_trends ;
 SELECT avg(`Purchase Amount (USD)`) as Avrage_amount
 FROM transectiontrends.shopping_trends ;
 
+-- Total sales by category
+SELECT Category , sum(`Purchase Amount (USD)`) as Total_sales
+FROM transectiontrends.shopping_trends 
+GROUP BY Category 
+ORDER BY Total_sales desc;
+
+-- Average rating by item
+SELECT `Item Purchased`, avg(`Review Rating`) as avg_rating
+FROM transectiontrends.shopping_trends 
+GROUP BY `Item Purchased`
+ORDER BY avg_rating DESC
+
 
