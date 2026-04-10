@@ -55,7 +55,13 @@ LIMIT 5 ;
 -- Customers with subscriptions vs without
 SELECT `Subscription Status`, COUNT(*) as Total_customers
 FROM transectiontrends.shopping_trends 
-GROUP BY `Subscription Status`
+GROUP BY `Subscription Status` ;
+
+-- Which factor impacts spending most?
+SELECT Gender,avg(`Purchase Amount (USD)`) AS avg_spending
+FROM transectiontrends.shopping_trends
+GROUP BY Gender
+ORDER BY avg_spending DESC;
 
 
 
