@@ -63,6 +63,15 @@ FROM transectiontrends.shopping_trends
 GROUP BY Gender
 ORDER BY avg_spending DESC;
 
+-- Repeat customers (based on Previous Purchases)
+SELECT 
+    CASE 
+        WHEN "Previous Purchases" > 5 THEN 'Loyal'
+        ELSE 'New/Occasional'
+    END AS customer_type,
+    COUNT(*) AS total_customers
+FROM transectiontrends.shopping_trends
+GROUP BY customer_type;
 
 
 
