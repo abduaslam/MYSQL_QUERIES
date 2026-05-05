@@ -27,5 +27,15 @@ FROM MentalHealth.Teen_Mental_Health_Dataset;
 
 -- Does sleep hours decrease with higher social media usage?
 SELECT 
+CASE
+WHEN daily_social_media_hours <2 THEN "low_usage"
+WHEN daily_social_media_hours BETWEEN 2 AND 5 THEN "medium_usage"
+ELSE "High_Usage"
+END  AS Group_usage
+,AVG(sleep_hours) AS avg_sleep
+FROM MentalHealth.Teen_Mental_Health_Dataset
+GROUP BY Group_usage
+ORDER BY avg_sleep DESC ;
 -- How does screen time before sleep affect sleep hours?
+
 -- Do teens with low physical activity have higher stress?
