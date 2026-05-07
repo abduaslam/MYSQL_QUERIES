@@ -39,3 +39,10 @@ ORDER BY avg_sleep DESC ;
 -- How does screen time before sleep affect sleep hours?
 
 -- Do teens with low physical activity have higher stress?
+-- Does less sleep increase depression?
+SELECT 
+  ROUND(sleep_hours,0) AS sleep,
+  AVG(depression_label) AS depression_rate
+FROM MentalHealth.Teen_Mental_Health_Dataset
+GROUP BY sleep
+ORDER BY sleep;
