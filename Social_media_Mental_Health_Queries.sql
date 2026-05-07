@@ -46,3 +46,10 @@ SELECT
 FROM MentalHealth.Teen_Mental_Health_Dataset
 GROUP BY sleep
 ORDER BY sleep;
+
+-- Does social media affect grades?
+SELECT 
+  ROUND(daily_social_media_hours,0) AS hours,
+  AVG(academic_performance) AS avg_grade
+FROM MentalHealth.Teen_Mental_Health_Dataset
+GROUP BY hours;
