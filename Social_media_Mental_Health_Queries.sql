@@ -62,4 +62,15 @@ ORDER BY High_anxiety DESC;
 -- Does social interaction reduce stress?
 SELECT social_interaction_level,AVG(stress_level) AS social_media_stress
 FROM MentalHealth.Teen_Mental_Health_Dataset
-GROUP BY social_interaction_level
+GROUP BY social_interaction_level;
+
+-- Age vs addiction level
+SELECT case
+when age<18 then "young"
+when age between 18 and 45 then "adule"
+else "older"
+end as Age_group
+ ,AVG(addiction_level) AS Avg_addiction
+FROM MentalHealth.Teen_Mental_Health_Dataset
+GROUP BY Age_group 
+ORDER BY Age_group desc
