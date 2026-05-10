@@ -54,10 +54,12 @@ SELECT
 FROM MentalHealth.Teen_Mental_Health_Dataset
 GROUP BY hours;
 
-
 -- Which gender has higher anxiety?
 SELECT gender, SUM(anxiety_level) AS High_anxiety
 FROM MentalHealth.Teen_Mental_Health_Dataset
 GROUP BY gender
-ORDER BY High_anxiety DESC
+ORDER BY High_anxiety DESC;
 -- Does social interaction reduce stress?
+SELECT social_interaction_level,AVG(stress_level) AS social_media_stress
+FROM MentalHealth.Teen_Mental_Health_Dataset
+GROUP BY social_interaction_level
