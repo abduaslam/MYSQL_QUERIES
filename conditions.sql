@@ -10,4 +10,11 @@ WHERE Segment IN('Cousumer','Home office');
 
 -- Retrieve all orders where the Category is NOT 'Technology'.
 SELECT * FROM SQL_Queries.Sample_Superstore
-WHERE NOT Category ='Technology'
+WHERE NOT Category ='Technology';
+
+-- Show orders where Sales BETWEEN 500 AND 1000 
+SELECT * FROM  SQL_Queries.Sample_Superstore
+WHERE Sales BETWEEN 500 AND  1000 
+ORDER BY Sales desc
+
+
