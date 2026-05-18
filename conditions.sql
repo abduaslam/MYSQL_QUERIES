@@ -15,6 +15,12 @@ WHERE NOT Category ='Technology';
 -- Show orders where Sales BETWEEN 500 AND 1000 
 SELECT * FROM  SQL_Queries.Sample_Superstore
 WHERE Sales BETWEEN 500 AND  1000 
-ORDER BY Sales desc
+ORDER BY Sales desc;
 
+-- Get all orders placed BETWEEN '2019-01-01' AND '2019-12-31'
+SELECT * FROM SQL_Queries.Sample_Superstore
+WHERE `Order Date` BETWEEN '2019-01-01' AND '2019-11-20';
 
+-- Find orders where (Category = 'Office Supplies' OR Category = 'Furniture') AND Profit > 50
+SELECT *  FROM SQL_Queries.Sample_Superstore
+WHERE (Category = 'Office Supplies' OR Category = 'Furniture') AND Profit > 50
