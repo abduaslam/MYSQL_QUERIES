@@ -35,7 +35,15 @@ WHERE InvoiceDate >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 
 -- 4. Top Selling Products
 -- Create a temporary table showing the top 10 best-selling products.
-
+CREATE TEMPORARY TABLE Top_10_salesProduct AS
+SELECT
+    StockCode,
+    Description,
+    SUM(Quantity) AS TotalSales
+FROM SQL_Queries.retailsDataset
+GROUP BY StockCode, Description
+ORDER BY TotalSales DESC
+LIMIT 10;
 
 -- 5. Employees in One Department
 -- Create a temporary table for employees working in the Sales department.
