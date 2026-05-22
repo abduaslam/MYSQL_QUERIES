@@ -23,12 +23,15 @@ SELECT StockCode , Description,UnitPrice
 FROM  SQL_Queries.retailsDataset 
 WHERE UnitPrice >(
 SELECT  AVG(UnitPrice)
-FROM SQL_Queries.retailsDataset )
-
-
+FROM SQL_Queries.retailsDataset );
 -- 3. Recent Orders
 -- Store all orders made in the last 30 days inside a temporary table.
-
+CREATE TEMPORARY TABLE Last_30_Orders AS
+SELECT
+    StockCode,
+    InvoiceDate
+FROM SQL_Queries.retailsDataset
+WHERE InvoiceDate >= DATE_SUB(CURDATE(), INTERVAL 30 DAY);
 
 -- 4. Top Selling Products
 -- Create a temporary table showing the top 10 best-selling products.
