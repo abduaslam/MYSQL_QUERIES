@@ -17,9 +17,17 @@
     MODIFY COLUMN time_priod DATETIME  ;
     
     -- show column info
-SHOW COLUMNS
-FROM access_to_basic_services
-LIKE 'time_period';
+	SHOW COLUMNS
+    FROM access_to_basic_services
+    LIKE 'time_period';
     
     -- Check all column names and data types
     DESC access_to_basic_services;
+    
+    --  add new column
+    ALTER TABLE access_to_basic_services
+    ADD COLUMN Gini_index VARCHAR(20);
+    
+    -- remove column Gini_index 
+    ALTER TABLE access_to_basic_services
+    DROP COLUMN Gini_index ;
