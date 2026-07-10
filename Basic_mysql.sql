@@ -31,3 +31,11 @@
     -- remove column Gini_index 
     ALTER TABLE access_to_basic_services
     DROP COLUMN Gini_index ;
+    
+    -- Remove table
+    DROP TABLE access_to_basic_services;
+    
+    -- Reomve database united_nation
+    DROP DATABASE united_nation
+    
+    
