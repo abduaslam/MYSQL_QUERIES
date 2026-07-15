@@ -21,6 +21,7 @@ SELECT
 FROM Access_to_Basic_Services
 WHERE Time_period = 2020 and Pct_managed_drinking_water_services <60
 GROUP BY Region
+HAVING numbers_of_countries  <10 
 ORDER BY Est_total_population_in_millions DESC ;
 
 
