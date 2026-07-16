@@ -55,3 +55,25 @@ GROUP BY
 ORDER BY
     p.category,
     total_quantity_sold DESC;
+
+-- Which product categories have a total quantity sold greater than 50?
+SELECT P.category,SUM(O.quantity) AS `total quantity sold greater than 10`
+FROM products P 
+JOIN orders O
+ON P.product_id = O.product_id 
+GROUP BY P.category
+HAVING  `total quantity sold greater than 50`>10 ;
+
+-- Which customers have placed more than 3 orders?
+SELECT customer_id ,COUNT(*) AS `more than 3 orders`
+FROM orders 
+GROUP BY customer_id
+HAVING `more than 3 orders`>3 ;
+
+
+
+
+
+
+
+
