@@ -20,3 +20,24 @@ FROM orders;
 SELECT COUNT(*)
 FROM orders ;
 
+-- What is the total quantity sold per product category?
+SELECT
+    p.category AS product_category,
+    SUM(o.quantity) AS total_quantity_sold
+FROM orders o
+JOIN products p
+    ON o.product_id = p.product_id
+GROUP BY p.category;
+
+-- 5. What is the average unit price per category?
+SELECT
+    category AS product_category,
+    AVG(unit_price) AS average_unit_price
+FROM products
+GROUP BY category;
+
+-- 6. How many orders has each customer placed?
+ SELECT customer_id, COUNT(quantity) AS number_of_customer_placed
+ FROM orders 
+GROUP BY customer_id ;
+
