@@ -41,3 +41,17 @@ GROUP BY category;
  FROM orders 
 GROUP BY customer_id ;
 
+-- calculates the total quantity sold for each product category and product name?
+SELECT
+    p.category AS product_category,
+    p.name AS product_name,
+    SUM(o.quantity) AS total_quantity_sold
+FROM orders o
+JOIN products p
+    ON o.product_id = p.product_id
+GROUP BY
+    p.category,
+    p.name
+ORDER BY
+    p.category,
+    total_quantity_sold DESC;
