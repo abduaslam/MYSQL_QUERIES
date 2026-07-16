@@ -41,7 +41,7 @@ GROUP BY category;
  FROM orders 
 GROUP BY customer_id ;
 
--- calculates the total quantity sold for each product category and product name?
+-- 7.  calculates the total quantity sold for each product category and product name?
 SELECT
     p.category AS product_category,
     p.name AS product_name,
@@ -56,7 +56,7 @@ ORDER BY
     p.category,
     total_quantity_sold DESC;
 
--- Which product categories have a total quantity sold greater than 50?
+-- 8. Which product categories have a total quantity sold greater than 50?
 SELECT P.category,SUM(O.quantity) AS `total quantity sold greater than 10`
 FROM products P 
 JOIN orders O
@@ -64,11 +64,17 @@ ON P.product_id = O.product_id
 GROUP BY P.category
 HAVING  `total quantity sold greater than 50`>10 ;
 
--- Which customers have placed more than 3 orders?
+--  9. Which customers have placed more than 3 orders?
 SELECT customer_id ,COUNT(*) AS `more than 3 orders`
 FROM orders 
 GROUP BY customer_id
 HAVING `more than 3 orders`>3 ;
+
+-- 10. Which product categories have an average unit price above 20.00? Use the products table
+ SELECT category, AVG(unit_price) AS `average unit price above 20.00`
+ FROM products
+ GROUP BY category
+ HAVING `average unit price above 20.00`>20;
 
 
 
