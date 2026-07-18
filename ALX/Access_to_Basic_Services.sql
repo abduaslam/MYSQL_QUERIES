@@ -24,6 +24,12 @@ GROUP BY Region
 HAVING numbers_of_countries  <10 
 ORDER BY Est_total_population_in_millions DESC ;
 
+-- change datatype in column "Time_period " to  decimal (6,2)
+SELECT
+    Region,
+    Country_name,
+    CAST(Time_period AS DECIMAL(6,2)) AS Time_period
+FROM Access_to_Basic_Services;
 
 
 
