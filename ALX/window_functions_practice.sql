@@ -1,0 +1,2 @@
+CREATE DATABASE window_functions_practice;
+USE window_functions_practice;
