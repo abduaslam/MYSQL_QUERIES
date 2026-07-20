@@ -41,6 +41,18 @@ SELECT
 FROM Access_to_Basic_Services
 WHERE Country_name LIKE '%(%';
 
-
+-- create new column ID from Country_name,Est_population_in_millions
+SELECT DISTINCT
+    Country_name,
+    Time_period,
+    Est_population_in_millions,
+    CONCAT(
+        SUBSTRING(IFNULL(UPPER(Country_name), 'UNKNOWN'),1,4),
+        '_',
+        IFNULL(Time_period, 'UNKNOWN'),
+        '_',
+        IFNULL(Pct_managed_sanitation_services, 'UNKNOWN')
+    ) AS NEW_ID
+FROM Access_to_Basic_Services;
 
 
