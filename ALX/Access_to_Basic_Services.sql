@@ -31,9 +31,15 @@ SELECT
     CAST(Time_period AS DECIMAL(6,2)) AS Time_period
 FROM Access_to_Basic_Services;
 
-
-
-
+-- clean data in column country name that has extra info
+SELECT
+    Country_name,
+    POSITION('(' IN Country_name) AS position_opening_brackets,
+    LENGTH(Country_name) AS length_of_string,
+    RTRIM(LEFT(Country_name, POSITION('(' IN Country_name) - 1)) AS new_country_name,
+    LENGTH(RTRIM(LEFT(Country_name, POSITION('(' IN Country_name) - 1))) AS new_length_string
+FROM Access_to_Basic_Services
+WHERE Country_name LIKE '%(%';
 
 
 
