@@ -98,3 +98,32 @@ SELECT
     CAST(InvoiceId AS CHAR(20)) AS InvoiceId_Text
 FROM Invoice;
 
+/*
+Task 8: Customer Email Domain Check
+The IT team wants to audit the email domains used by customers.
+ Create a report that shows the FirstName, LastName, and a new column EmailDomain. 
+ The EmailDomain should be the portion of the email address that comes after the '@' symbol.
+*/
+SELECT
+    FirstName,
+    LastName,
+    Email,
+    SUBSTRING(Email, POSITION('@' IN Email) + 1) AS EmailDomain
+FROM Customer;
+
+/*
+Task 9: Customer Name Length
+
+The marketing team is running a survey and wants to know the length of each customer's first name. 
+Create a report showing the CustomerId, FirstName, and a new column called NameLength that shows the number of characters in their first name.
+Query: Use a string length function to count the characters in the FirstName column.
+
+*/
+
+/*
+Task 10: Standardizing Employee Titles
+HR wants a report to audit employee titles.
+ They've noticed some titles are in mixed cases and want to see them all in lowercase.
+ Create a report showing EmployeeId, LastName, and a new column Title_Lowercase with the title in all lowercase.
+Query: Use a case conversion function to change the Title column to lowercase.
+*/
