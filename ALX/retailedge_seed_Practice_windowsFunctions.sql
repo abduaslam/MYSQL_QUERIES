@@ -15,10 +15,8 @@ SELECT
 FROM orders AS o
 JOIN products AS p
     ON o.product_id = p.product_id;
-    
---  
+     
 -- Rank customers according to their total spending
-
 SELECT
     customer_id,
     total_spend,
@@ -33,3 +31,37 @@ FROM (
     GROUP BY customer_id
 ) AS customer_totals
 ORDER BY customer_rank;
+
+-- Show each order along with the value of the previous order based on order date
+SELECT
+    order_id,
+    order_date,
+    (quantity * unit_price) AS order_value,
+    LAG(quantity * unit_price) OVER (
+        ORDER BY order_date ASC
+    ) AS previous_order_value
+FROM orders
+ORDER BY order_date ASC;
+
+SELECT
+    order_id,
+    order_date,
+    order_value,
+    previous_order_value,
+    
+    -- Calculate percentage change: ((current order value - previous order value) / previous order value) * 100
+    ROUND(
+        ((order_value - previous_order_value) / previous_order_value) * 100,
+        2
+    ) AS rate_of_change
+FROM (
+    SELECT
+        order_id,
+        order_date,
+        (quantity * unit_price) AS order_value,
+        LAG(quantity * unit_price) OVER (
+            ORDER BY order_date ASC
+        ) AS previous_order_value
+    FROM orders
+) AS order_values
+ORDER BY order_date ASC;

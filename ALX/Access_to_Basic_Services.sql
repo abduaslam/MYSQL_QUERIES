@@ -41,7 +41,7 @@ SELECT
 FROM Access_to_Basic_Services
 WHERE Country_name LIKE '%(%';
 
--- create new column ID from Country_name,Est_population_in_millions
+-- create new country ID from Country_name,Est_population_in_millions
 SELECT DISTINCT
     Country_name,
     Time_period,
