@@ -109,4 +109,42 @@ FROM restaurants
 ORDER BY avg_rating DESC;
 
 
+/*
+write a SQL query that:
+Uses a CASE statement to classify each order into a 'Price Tier': 'Premium' for price > 20, 'Mid-Range' for price between 10 and 20, and 'Budget' for price below 10.
+Groups the results by Price Tier using GROUP BY.
+Returns the Price Tier, the total number of orders in that tier aliased as 'Total Orders', and the total revenue per tier (quantity * price) aliased as 'Total Revenue'.
+ Round Total Revenue to 2 decimal places.
+Orders the results by Total Revenue descending.
+*/
+SELECT * FROM orders ;
+SELECT 
+    CASE 
+        WHEN price > 20 THEN 'Premium'
+        WHEN price BETWEEN 10 AND 20 THEN 'Mid-Range'
+        WHEN price < 10 THEN 'Budget'
+    END AS `Price Tier`,
+
+    COUNT(*) AS `Total Orders`,
+
+    ROUND(SUM(quantity * price), 2) AS `Total Revenue`
+
+FROM orders
+
+GROUP BY 
+    CASE 
+        WHEN price > 20 THEN 'Premium'
+        WHEN price BETWEEN 10 AND 20 THEN 'Mid-Range'
+        WHEN price < 10 THEN 'Budget'
+    END
+
+ORDER BY `Total Revenue` DESC;
+
+
+
+
+
+
+
+
 
