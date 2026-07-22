@@ -125,6 +125,100 @@ SELECT
 FROM water_source
 GROUP BY type_of_water_source;
 
+-/*calculate the total number of people served by each type of water source in total, 
+to make it easier to interpret, order them so the most
+people served by a source is at the top*/
+
+SELECT
+    type_of_water_source,
+    SUM(number_of_people_served) AS total_people_served
+FROM water_source
+GROUP BY type_of_water_source
+ORDER BY total_people_served DESC;
+
+-- calculate the percentage
+SELECT
+    type_of_water_source,
+    total_people_served,
+    ROUND(
+        (total_people_served * 100.0) /
+        SUM(total_people_served) OVER (),
+        2
+    ) AS percentage_of_total
+FROM (
+    SELECT
+        type_of_water_source,
+        SUM(number_of_people_served) AS total_people_served
+    FROM water_source
+    GROUP BY type_of_water_source
+) AS totals
+ORDER BY total_people_served DESC;
+
+
+                      /*Start of a solution
+At some point, we will have to fix or improve all of the infrastructure, so we should start thinking about how we can make a data-driven decision
+how to do it. I think a simple approach is to fix the things that affect most people first. So let's write a query that ranks each type of source based
+on how many people in total use it. RANK() should tell you we are going to need a window function to do this, so let's think through the problem.*/
+   
+   
+ --   We will need the following columns:
+--  Type of sources 
+--  Total people served grouped by the types 
+--  A rank based on the total people served, grouped by the types 
+
+  -- window function on the total people served column, converting it into a rank
+ SELECT
+    type_of_water_source,
+    total_people_served,
+    RANK() OVER (ORDER BY total_people_served DESC) AS rank_by_people_served
+FROM (
+    SELECT
+        type_of_water_source,
+        SUM(number_of_people_served) AS total_people_served
+    FROM water_source
+    GROUP BY type_of_water_source
+) AS totals
+ORDER BY rank_by_people_served;
+
+-- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
