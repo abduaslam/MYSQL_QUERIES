@@ -180,15 +180,64 @@ FROM (
 ) AS totals
 ORDER BY rank_by_people_served;
 
--- 
+         /*
+         create a query to do this, and keep these requirements in mind:
+1. The sources within each type should be assigned a rank.
+2. Limit the results to only improvable sources.
+3. Think about how to partition, filter and order the results set.
+4. Order the results to see the top of the list.
+         */
+SELECT source_id,
+       type_of_water_source,
+       number_of_people_served,
+      RANK() OVER (
+        PARTITION BY type_of_water_source
+        ORDER BY number_of_people_served DESC
+    ) AS rank_each_type 
+FROM water_source
+WHERE type_of_water_source IN ('river','shared_taps');
 
 
+/*
+Analysing queues
+Ok, this is the really big, and last table we'll look at this time. The analysis is going to be a bit tough, but the results will be worth it, so stretch out
 
+Ok, these are some of the things I think are worth looking at:
+1. How long did the survey take?
+2. What is the average total queue time for water?
+3. What is the average queue time on different days?
+4. How can we communicate this information efficiently?
+*/
 
+-- 1. How long did the survey take?
+SELECT
+    MIN(time_of_record) AS survey_start,
+    MAX(time_of_record) AS survey_end,
+    DATEDIFF(MAX(time_of_record), MIN(time_of_record)) AS survey_duration_days
+FROM visits;
 
+-- What is the average total queue time for water?
+SELECT
+    AVG(time_in_queue) AS avg_queue_time
+FROM visits;
 
+-- 3.
 
+-- look at the queue times aggregated across the different days of the week.
+SELECT
+    DAYNAME(time_of_record) AS day_of_week,
+    AVG(time_in_queue) AS avg_queue_time
+FROM visits
+GROUP BY DAYNAME(time_of_record)
+ORDER BY avg_queue_time DESC;
 
+-- We can also look at what time during the day people collect water. Try to order the results in a meaningful way.?
+SELECT
+    HOUR(time_of_record) AS hour_of_day,
+    AVG(time_in_queue) AS avg_queue_time
+FROM visits
+GROUP BY HOUR(time_of_record)
+ORDER BY hour_of_day;
 
 
 
